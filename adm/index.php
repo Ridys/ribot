@@ -10,7 +10,7 @@ if(isset($_POST['search'])){
 	$request = $_POST['search'];
     // замена символов
       $points = array('.', 'ё', "'", '?', '!', ',', ')', '(', ':');
-      $replace = array('', 'е', "", '', '', '', '', '', '');
+      $replace = array('', 'е', "", '', '', '', '', '');
       $textr = str_replace($points, $replace, $request);
 	require_once 'db.php';
 	$sqlr = "SELECT `id` FROM `answer` WHERE `text`='$textr'";
