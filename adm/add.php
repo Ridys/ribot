@@ -12,7 +12,7 @@ if(isset($_POST['text_full'],$_POST['phrase1'],$_POST['phrase2'])) {
   $u_p2 = $_POST['phrase2'];
   // замена символов
   $points = array('.', 'ё', "'", '?', '!', ',', ')', '(', ':');
-  $replace = array('', 'е', "", '', '', '', '', '');
+  $replace = array('', 'е', "", '', '', '', '', '', '');
   $textr = str_replace($points, $replace, $u_text);
     require_once 'db.php';
     $query = "INSERT INTO `answer`(`text`, `1`, `2`) VALUES ('$textr','$u_p1','$u_p2')";

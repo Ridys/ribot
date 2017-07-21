@@ -29,7 +29,7 @@ switch ($data->type) {
 
     // замена символов
       $points = array('.', 'ё', "'", '?', '!', ',', ')', '(', ':');
-      $replace = array('', 'е', "", '', '', '', '', '');
+      $replace = array('', 'е', "", '', '', '', '', '', '');
       $textr = str_replace($points, $replace, $text);
 
     // действия с базой (общение)
