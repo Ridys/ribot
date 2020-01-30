@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "$DOCKER_TOKEN" | docker login -u ridys --password-stdin
+docker-compose push

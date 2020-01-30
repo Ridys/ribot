@@ -1,0 +1,32 @@
+FROM python:3.7-stretch
+
+# Env variables
+ENV APP_SECRET_KEY=$APP_SECRET_KEY DB_USER_PASSWD=$DB_USER_PASSWD DOCKER_TOKEN=$DOCKER_TOKEN EMAIL_PASSWORD=$EMAIL_PASSWORD
+# Install web-server
+RUN apt-get update && apt-get -y upgrade && apt-get -y install nginx
+# Nginx configs
+COPY ./.docker/nginx/sites-available/default /etc/nginx/sites-available/default
+COPY ./.docker/nginx/nginx.conf /etc/nginx/nginx.conf
+# Supervisord config
+COPY ./.docker/supervisord.conf /etc/supervisord.conf
+
+# Install supervisor, UWSGI and create no-root user
+RUN pip install git+https://github.com/Supervisor/supervisor && pip install uwsgi && useradd -m -d /var/django -s /bin/false -c "UWSGI User" -U django
+
+# Change user to Django and copy uwsgi config
+USER django
+COPY ./.docker/uwsgi.ini /var/django/uwsgi.ini
+# Sources
+COPY . /var/django/www
+
+# Install python requirements in system
+USER root
+RUN pip install -r /var/django/www/requirements.txt
+# To django user, cp settings_local, collect new static files
+USER django
+COPY ./settings_local_dist.py /var/django/www/settings_local.py
+RUN python /var/django/www/manage.py collectstatic --noinput
+
+USER root
+EXPOSE 80
+ENTRYPOINT ["/usr/local/bin/supervisord"]
