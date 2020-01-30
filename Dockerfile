@@ -13,19 +13,14 @@ COPY ./.docker/supervisord.conf /etc/supervisord.conf
 # Install supervisor, UWSGI and create no-root user
 RUN pip install git+https://github.com/Supervisor/supervisor && pip install uwsgi && useradd -m -d /var/django -s /bin/false -c "UWSGI User" -U django
 
-# Change user to Django and copy uwsgi config
-USER django
-COPY ./.docker/uwsgi.ini /var/django/uwsgi.ini
 # Sources
 COPY . /var/django/www
-
-# Install python requirements in system
-USER root
-RUN pip install -r /var/django/www/requirements.txt
-# To django user, cp settings_local, collect new static files
-USER django
+# Uwsgi config
+COPY ./.docker/uwsgi.ini /var/django/uwsgi.ini
+# Application config
 COPY ./settings_local_dist.py /var/django/www/settings_local.py
-RUN python /var/django/www/manage.py collectstatic --noinput
+# Install python requirements in system, collect static and change chown
+RUN pip install -r /var/django/www/requirements.txt && python /var/django/www/manage.py collectstatic --noinput && chown -R django:django /var/django
 
 USER root
 EXPOSE 80
