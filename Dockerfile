@@ -19,9 +19,8 @@ COPY . /var/django/www
 COPY ./.docker/uwsgi.ini /var/django/uwsgi.ini
 # Application config
 COPY ./settings_local_dist.py /var/django/www/settings_local.py
-# Install python requirements in system, collect static and change chown
-RUN pip install -r /var/django/www/requirements.txt && python /var/django/www/manage.py collectstatic --noinput && chown -R django:django /var/django
+# Install python requirements in system and change chown
+RUN pip install -r /var/django/www/requirements.txt && chown -R django:django /var/django
 
-USER root
 EXPOSE 80
 ENTRYPOINT ["/usr/local/bin/supervisord"]
