@@ -41,3 +41,14 @@ EMAIL_PORT = '465'
 EMAIL_BACKENDS = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True
 ## End mail settings ##
+
+## VKontakte settings ##
+VK_GROUP_ID = os.environ.get('VK_GROUP_ID', '')
+VK_GROUP_TOKEN = os.environ.get('VK_GROUP_TOKEN', '')
+NCPU = os.cpu_count() * 2
+## End VKontakte settings ##
+
+## WIT.AI settings ##
+WIT_APP_ID = os.environ.get('WIT_APP_ID', '')
+WIT_TOKEN = os.environ.get('WIT_TOKEN', '')
+## End WIT.AI settings ##

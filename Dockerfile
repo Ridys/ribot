@@ -1,7 +1,9 @@
 FROM python:3.7-stretch
 
 # Install web-server
-RUN apt-get update && apt-get -y upgrade && apt-get -y install nginx
+RUN apt-get update && apt-get -y --no-install-recommends install nginx=1.10.3-1+deb9u3 \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 # Nginx configs
 COPY ./.docker/nginx/sites-available/default /etc/nginx/sites-available/default
 COPY ./.docker/nginx/nginx.conf /etc/nginx/nginx.conf
@@ -9,7 +11,7 @@ COPY ./.docker/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./.docker/supervisord.conf /etc/supervisord.conf
 
 # Install supervisor, UWSGI and create no-root user
-RUN pip install git+https://github.com/Supervisor/supervisor && pip install uwsgi && useradd -m -d /var/django -s /bin/false -c "UWSGI User" -U django
+RUN pip install git+https://github.com/Supervisor/supervisor@4.1.0 && pip install uwsgi==2.0.18 && useradd -m -d /var/django -s /bin/false -c "UWSGI User" -U django
 
 # Sources
 COPY . /var/django/www

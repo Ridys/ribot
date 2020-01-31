@@ -2,7 +2,7 @@ version: '3'
 services:
   main:
     build: .
-    image: ridys/ribot
+    image: ridys/ribot:${RIBOT_VERSION}
     ports:
       - "127.0.0.1:30777:80"
     volumes:
@@ -11,6 +11,10 @@ services:
       APP_SECRET_KEY: ${APP_SECRET_KEY}
       DB_USER_PASSWD: ${DB_USER_PASSWD}
       EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+      VK_GROUP_ID: ${VK_GROUP_ID}
+      VK_GROUP_TOKEN: ${VK_GROUP_TOKEN}
+      WIT_APP_ID: ${WIT_APP_ID}
+      WIT_TOKEN: ${WIT_TOKEN}
     restart: always
     depends_on:
       - redis
