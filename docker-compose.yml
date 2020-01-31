@@ -1,0 +1,33 @@
+version: '3'
+services:
+  main:
+    build: .
+    image: ridys/ribot
+    ports:
+      - "127.0.0.1:30777:80"
+    volumes:
+      - ./media:/var/django/www/media
+    environment:
+      APP_SECRET_KEY: ${APP_SECRET_KEY}
+      DB_USER_PASSWD: ${DB_USER_PASSWD}
+      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+    restart: always
+    depends_on:
+      - redis
+      - mariadb
+  redis:
+    image: redis
+    restart: always
+    volumes:
+      - ./redis:/data
+  mariadb:
+    image: mariadb:10.4
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWD}
+      MYSQL_DATABASE: ribot
+      MYSQL_USER: ribot
+      MYSQL_PASSWORD: ${DB_USER_PASSWD}
+    restart: always
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+     - ./db:/var/lib/mysql
