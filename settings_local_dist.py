@@ -45,4 +45,10 @@ EMAIL_USE_SSL = True
 ## VKontakte settings ##
 VK_GROUP_ID = os.environ.get('VK_GROUP_ID', '')
 VK_GROUP_TOKEN = os.environ.get('VK_GROUP_TOKEN', '')
+NCPU = os.cpu_count() * 2
 ## End VKontakte settings ##
+
+## WIT.AI settings ##
+WIT_APP_ID = os.environ.get('WIT_APP_ID', '')
+WIT_TOKEN = os.environ.get('WIT_TOKEN', '')
+## End WIT.AI settings ##

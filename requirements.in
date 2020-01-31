@@ -3,3 +3,4 @@ Pillow # https://github.com/python-pillow/Pillow
 mysqlclient # https://pypi.org/project/mysqlclient/
 redis # https://pypi.org/project/redis/
 vk_api # https://github.com/python273/vk_api
+wit # https://github.com/wit-ai/pywit

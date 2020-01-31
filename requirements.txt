@@ -11,10 +11,13 @@ django==3.0.2
 idna==2.8                 # via requests
 mysqlclient==1.4.6
 pillow==7.0.0
+prompt-toolkit==3.0.3     # via wit
 pytz==2019.3              # via django
 redis==3.3.11
-requests==2.22.0          # via vk-api
+requests==2.22.0          # via vk-api, wit
 six==1.14.0               # via vk-api
 sqlparse==0.3.0           # via django
 urllib3==1.25.8           # via requests
 vk-api==11.7.0
+wcwidth==0.1.8            # via prompt-toolkit
+wit==5.1.0

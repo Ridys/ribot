@@ -13,6 +13,8 @@ services:
       EMAIL_PASSWORD: ${EMAIL_PASSWORD}
       VK_GROUP_ID: ${VK_GROUP_ID}
       VK_GROUP_TOKEN: ${VK_GROUP_TOKEN}
+      WIT_APP_ID: ${WIT_APP_ID}
+      WIT_TOKEN: ${WIT_TOKEN}
     restart: always
     depends_on:
       - redis
