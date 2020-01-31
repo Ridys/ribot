@@ -1,7 +1,7 @@
 FROM python:3.7-stretch
 
 # Install web-server
-RUN apt-get update && apt-get -y --no-install-recommends install nginx=1.10.3 \
+RUN apt-get update && apt-get -y --no-install-recommends install nginx=1.10.3-1+deb9u3 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 # Nginx configs
