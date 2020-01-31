@@ -2,11 +2,9 @@ version: '3'
 services:
   main:
     build: .
+    image: ridys/ribot
     ports:
       - "127.0.0.1:30777:80"
-    links:
-      - redis
-      - mariadb
     volumes:
       - ./media:/var/django/www/media
     environment:
