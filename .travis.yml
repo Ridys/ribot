@@ -17,6 +17,7 @@ install:
 
 script:
   - docker-compose up -d
+  - sleep 10
   - docker-compose exec main python /var/django/www/manage.py test
 
 deploy:
