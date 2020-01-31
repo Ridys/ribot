@@ -41,3 +41,8 @@ EMAIL_PORT = '465'
 EMAIL_BACKENDS = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True
 ## End mail settings ##
+
+## VKontakte settings ##
+VK_GROUP_ID = os.environ.get('VK_GROUP_ID', '')
+VK_GROUP_TOKEN = os.environ.get('VK_GROUP_TOKEN', '')
+## End VKontakte settings ##
