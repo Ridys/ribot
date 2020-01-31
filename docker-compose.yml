@@ -10,7 +10,9 @@ services:
     volumes:
       - ./media:/var/django/www/media
     environment:
-      MYSQL_PASSWORD: ${DB_USER_PASSWD}
+      APP_SECRET_KEY: ${APP_SECRET_KEY}
+      DB_USER_PASSWD: ${DB_USER_PASSWD}
+      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
     restart: always
     depends_on:
       - redis

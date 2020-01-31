@@ -1,7 +1,5 @@
 FROM python:3.7-stretch
 
-# Env variables
-ENV APP_SECRET_KEY=$APP_SECRET_KEY DB_USER_PASSWD=$DB_USER_PASSWD DOCKER_TOKEN=$DOCKER_TOKEN EMAIL_PASSWORD=$EMAIL_PASSWORD
 # Install web-server
 RUN apt-get update && apt-get -y upgrade && apt-get -y install nginx
 # Nginx configs
