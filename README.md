@@ -1,0 +1,2 @@
+# ribot
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c9dd4aade32848929ed2ec77e90d091d)](https://app.codacy.com/manual/Ridys/ribot?utm_source=github.com&utm_medium=referral&utm_content=Ridys/ribot&utm_campaign=Badge_Grade_Dashboard)
