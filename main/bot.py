@@ -94,9 +94,9 @@ class BotAction(object):
             action = self.msg_object['action']
             chat_invite_user = False
             if action['type'] == 'chat_invite_user':
-                if action['member_id'] == -VK_GROUP_ID:
+                if action['member_id'] == -int(VK_GROUP_ID):
                     chat_invite_user = True
-        except IndexError:
+        except KeyError:
             chat_invite_user = False
         # if action not equals chat_invite_user
         if not chat_invite_user:
