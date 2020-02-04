@@ -22,6 +22,7 @@ class Command(BaseCommand):
         def message_new(obj):
             bot = BotAction(obj)
             bot.check_audio()
+            bot.chat_invite_user()
             bot.finish(VK)
             return True
         chunk = []
