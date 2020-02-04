@@ -15,6 +15,8 @@ class BotAction(object):
         """
         Constructor
         """
+        # VK message id
+        self.vk_id = msg_object['id']
         # original text of user message
         self.text = msg_object['text']
         # remove punctuation, spaces from original text
@@ -39,8 +41,12 @@ class BotAction(object):
             return False
         session = session.get_api()
         try:
-            session.messages.send(user_id=self.user_id, random_id=getrandbits(64),
-                                  message=self.response, peer_id=self.peer_id)
+            if self.vk_id == 0:
+                session.messages.send(random_id=getrandbits(64), message=self.response,
+                                      peer_id=self.peer_id)
+            else:
+                session.messages.send(user_id=self.user_id, random_id=getrandbits(64),
+                                      message=self.response, peer_id=self.peer_id)
         except ApiError as err:
             print('API_ERROR: {}'.format(str(err)))
         return True
