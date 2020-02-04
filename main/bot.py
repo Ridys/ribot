@@ -5,6 +5,7 @@ import re
 from random import getrandbits
 from vk_api.exceptions import ApiError
 from main.providers.wit_ai import speech
+from settings_local import VK_GROUP_ID
 
 
 class BotAction(object):
@@ -15,6 +16,8 @@ class BotAction(object):
         """
         Constructor
         """
+        # original message object
+        self.msg_object = msg_object
         # VK message id
         self.vk_id = msg_object['id']
         # original text of user message
@@ -51,7 +54,6 @@ class BotAction(object):
             print('API_ERROR: {}'.format(str(err)))
         return True
 
-
     def check_audio(self):
         """
         If message contains audiomessage
@@ -81,4 +83,27 @@ class BotAction(object):
         # if audio files not found in attachments
         if not self.response:
             return False
+        return True
+
+    def chat_invite_user(self):
+        """
+        If bot invited to chat
+        send "Hello" message
+        """
+        try:
+            action = self.msg_object['action']
+            chat_invite_user = False
+            if action['type'] == 'chat_invite_user':
+                if action['member_id'] == -VK_GROUP_ID:
+                    chat_invite_user = True
+        except IndexError:
+            chat_invite_user = False
+        # if action not equals chat_invite_user
+        if not chat_invite_user:
+            return False
+        self.response += '🤖 Привет! Я - чат-бот, созданный на базе бота с \
+открытым исходным кодом. Вы можете изучить мои команды на странице RiBot.\n\n\
+В настоящее время я обрабатываю сообщения только с тегом @club{}. Администраторы чата могут разрешить мне \
+просмотр всех сообщений или назначить администратором беседы. Обещаю, что не собираюсь хулиганить!\n\n\
+@ageykindmi(⁉ Техническая поддержка)\n@ribot(✍🏻 Список команд)'.format(VK_GROUP_ID)
         return True
